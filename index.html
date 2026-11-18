@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>सहायक शिक्षक भर्ती परीक्षा मॉडल पेपर</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <header class="navbar">
+        <div class="nav-left">
+            <button id="menu-btn" class="icon-btn" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <span class="brand-title" onclick="showHome()">मॉडल पेपर पोर्टल</span>
+        </div>
+        <div class="nav-right">
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar / Hamburger Menu -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>अध्याय (Chapters)</h3>
+            <button id="close-btn" class="icon-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <ul class="nav-links">
+            <li onclick="showHome()"><i class="fas fa-home"></i> होम पेज (Home)</li>
+            <li onclick="loadChapter('hindi', '1. सामान्य हिन्दी')"><i class="fas fa-language"></i> 1. सामान्य हिन्दी</li>
+            <li onclick="loadChapter('english', '2. सामान्य अंग्रेजी')"><i class="fas fa-font"></i> 2. सामान्य अंग्रेजी</li>
+            <li onclick="loadChapter('evs', '3. पर्यावरण शिक्षाशास्त्र')"><i class="fas fa-leaf"></i> 3. पर्यावरण शिक्षाशास्त्र</li>
+            <li onclick="loadChapter('cdp', '4. बालविकास')"><i class="fas fa-child"></i> 4. बालविकास</li>
+            <li onclick="loadChapter('reasoning', '5. रिजनिंग')"><i class="fas fa-brain"></i> 5. रिजनिंग</li>
+            <li onclick="loadChapter('maths', '6. गणित शिक्षाशास्त्र')"><i class="fas fa-calculator"></i> 6. गणित शिक्षाशास्त्र</li>
+            <li class="practice-menu-item" onclick="startPracticeSet()"><i class="fas fa-random"></i> प्रैक्टिस सेट (50 MCQs)</li>
+        </ul>
+    </aside>
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Main Content Area -->
+    <main class="container">
+        
+        <!-- HOME PAGE SECTION -->
+        <section id="home-section" class="home-section">
+            <div class="hero-card">
+                <div class="badge">CG व्यापम / शिक्षक भर्ती विशेष</div>
+                <h1>सहायक शिक्षक भर्ती परीक्षा मॉडल पेपर</h1>
+                <p>सभी महत्वपूर्ण विषयों के अध्यायवार बहुविकल्पीय प्रश्न (MCQs) और 50 प्रश्नों का रैंडम प्रैक्टिस टेस्ट।</p>
+                
+                <div class="hero-actions">
+                    <button class="primary-btn" onclick="startPracticeSet()">
+                        <i class="fas fa-play-circle"></i> प्रैक्टिस सेट शुरू करें (50 MCQs)
+                    </button>
+                </div>
+            </div>
+
+            <h2 class="section-heading">अध्याय चुनें (Select Chapter)</h2>
+            <div class="chapter-grid">
+                <div class="chapter-card" onclick="loadChapter('hindi', '1. सामान्य हिन्दी')">
+                    <i class="fas fa-language"></i>
+                    <h3>1. सामान्य हिन्दी</h3>
+                    <span id="count-hindi">0 प्रश्न</span>
+                </div>
+                <div class="chapter-card" onclick="loadChapter('english', '2. सामान्य अंग्रेजी')">
+                    <i class="fas fa-font"></i>
+                    <h3>2. सामान्य अंग्रेजी</h3>
+                    <span id="count-english">0 प्रश्न</span>
+                </div>
+                <div class="chapter-card" onclick="loadChapter('evs', '3. पर्यावरण शिक्षाशास्त्र')">
+                    <i class="fas fa-leaf"></i>
+                    <h3>3. पर्यावरण शिक्षाशास्त्र</h3>
+                    <span id="count-evs">0 प्रश्न</span>
+                </div>
+                <div class="chapter-card" onclick="loadChapter('cdp', '4. बालविकास')">
+                    <i class="fas fa-child"></i>
+                    <h3>4. बालविकास</h3>
+                    <span id="count-cdp">0 प्रश्न</span>
+                </div>
+                <div class="chapter-card" onclick="loadChapter('reasoning', '5. रिजनिंग')">
+                    <i class="fas fa-brain"></i>
+                    <h3>5. रिजनिंग</h3>
+                    <span id="count-reasoning">0 प्रश्न</span>
+                </div>
+                <div class="chapter-card" onclick="loadChapter('maths', '6. गणित शिक्षाशास्त्र')">
+                    <i class="fas fa-calculator"></i>
+                    <h3>6. गणित शिक्षाशास्त्र</h3>
+                    <span id="count-maths">0 प्रश्न</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ / QUESTIONS SECTION -->
+        <section id="quiz-section" class="quiz-section hidden">
+            <div class="quiz-header">
+                <h2 id="quiz-title">अध्याय का नाम</h2>
+                <div class="quiz-controls">
+                    <!-- Go To Question Control -->
+                    <div class="goto-box">
+                        <input type="number" id="goto-input" min="1" placeholder="प्र. क्र.">
+                        <button onclick="goToQuestion()" class="secondary-btn">GoTo</button>
+                    </div>
+                    <!-- Practice Set Button -->
+                    <button onclick="startPracticeSet()" class="practice-btn">
+                        <i class="fas fa-random"></i> 50 MCQs सेट
+                    </button>
+                </div>
+            </div>
+
+            <div id="questions-container" class="questions-container">
+                <!-- Questions will be injected here via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Chapter Data Files (Har chapter ki alag JS file) -->
+    <script src="hindi.js"></script>
+    <script src="english.js"></script>
+    <script src="evs.js"></script>
+    <script src="cdp.js"></script>
+    <script src="reasoning.js"></script>
+    <script src="maths.js"></script>
+
+    <!-- Main Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
