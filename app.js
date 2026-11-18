@@ -113,7 +113,7 @@ function startPracticeSet() {
     window.scrollTo(0, 0);
 }
 
-// Render Questions to DOM
+// Render Questions to DOM (with Answer & Explanation)
 function renderQuestions(questions) {
     const container = document.getElementById('questions-container');
     container.innerHTML = '';
@@ -137,8 +137,11 @@ function renderQuestions(questions) {
         card.innerHTML = `
             <div class="q-text">प्रश्न ${qNum}. ${item.question}</div>
             <div class="options-list">${optionsHTML}</div>
-            <button class="ans-toggle-btn" onclick="toggleAnswer(${qNum})">उत्तर देखें / छुपाएं</button>
-            <div id="ans-${qNum}" class="ans-box">सही उत्तर: ${item.options[item.answer]}</div>
+            <button class="ans-toggle-btn" onclick="toggleAnswer(${qNum})">उत्तर एवं व्याख्या देखें</button>
+            <div id="ans-${qNum}" class="ans-box">
+                <div>सही उत्तर: ${item.options[item.answer]}</div>
+                ${item.explanation ? `<div style="margin-top:6px; font-weight:normal; font-size:0.95rem;"><strong>व्याख्या:</strong> ${item.explanation}</div>` : ''}
+            </div>
         `;
         container.appendChild(card);
     });
@@ -158,7 +161,7 @@ function checkOption(el, selectedIdx, correctIdx) {
     }
 }
 
-// Show/Hide Answer Box
+// Show/Hide Answer & Explanation Box
 function toggleAnswer(qNum) {
     const ansBox = document.getElementById(`ans-${qNum}`);
     ansBox.classList.toggle('show');
